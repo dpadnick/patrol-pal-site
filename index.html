@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patrol Pal | Support Your Ski Patrol</title>
+  <meta name="description" content="Patrol Pal is building a simple way for skiers and riders to thank the ski patrollers who keep the mountain safe. Join the list to hear when your mountain goes live.">
+
+  <!-- SITE_URL lives in /config.js. Static HTML can't read it at render time,
+       so these three tags repeat it. If the domain ever changes, update config.js
+       AND these lines AND sitemap.xml / robots.txt. -->
+  <link rel="canonical" href="https://patrol-pal.com/">
+  <meta property="og:url" content="https://patrol-pal.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrol Pal">
+  <meta property="og:title" content="Patrol Pal | Support Your Ski Patrol">
+  <meta property="og:description" content="A simple way to thank the people who keep the mountain safe. Join the list.">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1F2937">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 115'%3E%3Cpath d='M50 2L6 20v32c0 28 44 60 44 60s44-32 44-60V20L50 2z' fill='%231F2937'/%3E%3Cpath d='M22 72l20-30 9 13 7-9 20 26z' fill='%23C62828'/%3E%3Cpath d='M42 42l-6 9h12z' fill='%23fff'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="/config.js"></script>
+
+  <style>
+    :root {
+      --red: #C62828;
+      --red-dark: #A31F1F;
+      --charcoal: #1F2937;
+      --slate: #374151;
+      --muted: #6B7280;
+      --light: #F3F4F6;
+      --white: #FFFFFF;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: var(--charcoal);
+      background: var(--white);
+      line-height: 1.6;
+    }
+    a { color: var(--red); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    header {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+      padding: 18px 0;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); font-weight: 800; font-size: 20px; letter-spacing: -0.01em; }
+    .brand svg { width: 30px; height: 34px; }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(1200px 500px at 85% -10%, rgba(198,40,40,0.35), transparent 60%),
+        linear-gradient(180deg, #111827 0%, var(--charcoal) 100%);
+      color: var(--white);
+      padding: 120px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 90px;
+      background: var(--white);
+      clip-path: polygon(0 100%, 0 70%, 14% 30%, 24% 55%, 38% 10%, 52% 60%, 63% 35%, 76% 70%, 88% 25%, 100% 60%, 100% 100%);
+    }
+    .hero-grid { display: grid; gap: 40px; grid-template-columns: 1fr; position: relative; z-index: 1; padding-bottom: 40px; }
+    @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.15fr 0.85fr; align-items: center; } }
+    .eyebrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FCA5A5; margin-bottom: 14px; }
+    h1 { font-size: clamp(36px, 6vw, 58px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 18px; font-weight: 800; }
+    h1 span { color: var(--red); }
+    .lede { font-size: 18px; color: #D1D5DB; max-width: 540px; margin: 0; }
+
+    /* Form card */
+    .card {
+      background: var(--white); color: var(--charcoal);
+      border-radius: var(--radius); padding: 26px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+    .card h2 { font-size: 20px; margin: 0 0 4px; letter-spacing: -0.01em; }
+    .card p.sub { margin: 0 0 18px; color: var(--muted); font-size: 14px; }
+    label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
+    input, select {
+      width: 100%; font: inherit; font-size: 16px;
+      padding: 12px 14px; border: 1px solid #D1D5DB; border-radius: 10px;
+      background: var(--white); color: var(--charcoal);
+    }
+    input:focus, select:focus { outline: 2px solid var(--red); outline-offset: 1px; border-color: transparent; }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    button {
+      width: 100%; margin-top: 18px; padding: 14px 18px;
+      font: inherit; font-weight: 700; font-size: 16px;
+      color: var(--white); background: var(--red);
+      border: 0; border-radius: 10px; cursor: pointer;
+      transition: background .15s ease;
+    }
+    button:hover { background: var(--red-dark); }
+    button[disabled] { opacity: .6; cursor: default; }
+    .fine { font-size: 12px; color: var(--muted); margin: 12px 0 0; }
+    .msg { margin-top: 14px; font-size: 14px; font-weight: 600; }
+    .msg.ok { color: #15803D; }
+    .msg.err { color: var(--red); }
+
+    /* Sections */
+    section { padding: 72px 0; }
+    .section-title { font-size: clamp(26px, 4vw, 36px); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 12px; font-weight: 800; }
+    .section-lede { color: var(--slate); max-width: 680px; margin: 0 0 36px; font-size: 17px; }
+
+    .steps { display: grid; gap: 18px; grid-template-columns: 1fr; counter-reset: step; }
+    @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step { background: var(--light); border-radius: var(--radius); padding: 24px; position: relative; }
+    .step::before {
+      counter-increment: step; content: counter(step);
+      display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center;
+      border-radius: 50%; background: var(--charcoal); color: var(--white); font-weight: 800; margin-bottom: 12px;
+    }
+    .step h3 { margin: 0 0 6px; font-size: 17px; }
+    .step p { margin: 0; color: var(--slate); font-size: 15px; }
+
+    .needs { background: var(--light); }
+    .grid-4 { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .grid-4 { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 980px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+    .need { background: var(--white); border-radius: var(--radius); padding: 22px; border-top: 4px solid var(--red); }
+    .need svg { width: 28px; height: 28px; color: var(--red); margin-bottom: 10px; }
+    .need h3 { margin: 0 0 6px; font-size: 16px; }
+    .need p { margin: 0; color: var(--slate); font-size: 14px; }
+
+    .story { background: var(--charcoal); color: #E5E7EB; }
+    .story .inner { max-width: 720px; }
+    .story h2 { color: var(--white); }
+    .story p { font-size: 17px; margin: 0 0 18px; }
+    .story strong { color: var(--white); }
+    .memoriam {
+      margin-top: 34px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.15);
+      font-size: 14px; color: #9CA3AF; font-style: italic;
+    }
+
+    .cta { text-align: center; }
+    .cta .btn {
+      display: inline-block; text-decoration: none; background: var(--red); color: var(--white);
+      font-weight: 700; padding: 14px 26px; border-radius: 10px;
+    }
+    .cta .btn:hover { background: var(--red-dark); }
+
+    footer { background: #111827; color: #9CA3AF; font-size: 13px; padding: 28px 0; }
+    footer .row { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; align-items: center; }
+    footer a { color: #D1D5DB; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="Patrol Pal home">
+        <svg viewBox="0 0 100 115" aria-hidden="true">
+          <path d="M50 2L6 20v32c0 28 44 60 44 60s44-32 44-60V20L50 2z" fill="#FFFFFF"/>
+          <path d="M50 10L13 25v27c0 23 37 51 37 51s37-28 37-51V25L50 10z" fill="#1F2937"/>
+          <path d="M22 76l20-30 9 13 7-9 20 26z" fill="#C62828"/>
+          <path d="M42 46l-6 9h12z" fill="#FFFFFF"/>
+        </svg>
+        Patrol Pal
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO + WAITLIST -->
+    <div class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Coming soon</span>
+          <h1>Supporting the <span>Guardians</span> of the Mountain.</h1>
+          <p class="lede">Ski patrollers throw explosives at 4 a.m., haul injured guests off icy runs, and dig out the mountain after every storm. Most can't accept a thank-you. Patrol Pal is building a simple way to change that.</p>
+        </div>
+
+        <div class="card" id="join">
+          <h2>Join the list</h2>
+          <p class="sub">Be the first to know when your mountain goes live.</p>
+          <form id="waitlist" novalidate>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+
+            <label for="first_name">First name <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+            <input id="first_name" name="first_name" type="text" autocomplete="given-name" maxlength="60">
+
+            <label for="home_mountain">Home mountain <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+            <input id="home_mountain" name="home_mountain" type="text" maxlength="80" placeholder="e.g. Mammoth Mountain">
+
+            <label for="role">I'm a…</label>
+            <select id="role" name="role">
+              <option value="skier_rider">Skier / rider</option>
+              <option value="patroller">Ski patroller</option>
+              <option value="patrol_leadership">Patrol director / leadership</option>
+              <option value="resort_staff">Resort staff</option>
+              <option value="other">Other</option>
+            </select>
+
+            <!-- Honeypot: humans never see or fill this -->
+            <div class="hp" aria-hidden="true">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" id="submit">Keep me posted</button>
+            <p class="msg" id="msg" role="status" aria-live="polite"></p>
+            <p class="fine">We'll only email you about Patrol Pal. Unsubscribe anytime.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WILL WORK -->
+    <section>
+      <div class="wrap">
+        <h2 class="section-title">The gratitude gap</h2>
+        <p class="section-lede">For decades, guests have asked patrollers the same thing after a rescue or a friendly assist: "Can I buy you a beer? Can I tip you?" Resort policies, tax rules, and logistics usually mean the answer is no — and that gratitude never lands.</p>
+        <div class="steps">
+          <div class="step">
+            <h3>Scan</h3>
+            <p>A QR code at the patrol shack, lift line, or on the trail map.</p>
+          </div>
+          <div class="step">
+            <h3>Tap</h3>
+            <p>Apple Pay or Google Pay. No app to download, no account to create.</p>
+          </div>
+          <div class="step">
+            <h3>Thank the crew</h3>
+            <p>Your support goes to your mountain's patrol team — not a faceless fund.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IT'S FOR -->
+    <section class="needs">
+      <div class="wrap">
+        <h2 class="section-title">Built for what the budget misses</h2>
+        <p class="section-lede">Patrol Pal is designed to fund team needs, not cash tips.</p>
+        <div class="grid-4">
+          <div class="need">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.722 3.656 1 1.261-.472 1.96-1.45 2.344-2.5"/><path d="M14.267 5.172c0-1.39 1.577-2.493 3.5-2.172 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"/><path d="M8 14v.5"/><path d="M16 14v.5"/><path d="M11.25 16.25h1.5L12 17l-.75-.75Z"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"/></svg>
+            <h3>Avalanche dogs</h3>
+            <p>Food, vet care, and training for rescue dog programs.</p>
+          </div>
+          <div class="need">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <h3>Advanced training</h3>
+            <p>Medical certifications and snow science education.</p>
+          </div>
+          <div class="need">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+            <h3>Specialized gear</h3>
+            <p>Rescue sleds, radios, and storm-cycle equipment.</p>
+          </div>
+          <div class="need">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+            <h3>Crew wellness</h3>
+            <p>Coffee and meals during storm cycles, and time together to fight burnout.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORIGIN STORY -->
+    <section class="story">
+      <div class="wrap">
+        <div class="inner">
+          <h2 class="section-title">It started with 171 inches of snow.</h2>
+          <p>The holiday storm cycle was historic. Over two weeks between Christmas and New Year's, Mammoth Mountain was buried under 14 feet of snow.</p>
+          <p>But the powder came with a heavy cost. We witnessed the tragedy of a skier lost to Snow Immersion Suffocation. Then, the heartbreaking loss of a Patroller, Cole Murphy, who gave his life conducting avalanche mitigation to make the mountain safe for us.</p>
+          <p><strong>The atmosphere on the mountain shifted.</strong></p>
+          <p>Operations were buried. Lifts couldn't open. Lines grew long, and frustration mounted. Online, the conversation fractured. Some vented about closed terrain, while others recognized the herculean, dangerous effort happening in the dark, hours before the first chair loaded.</p>
+          <p>I realized there was a disconnect.</p>
+          <p>There were thousands of us who wanted to say "Thank You" to the men and women throwing bombs and digging out towers. We wanted to acknowledge the risk. But there was no bridge — no way to connect the skier in the lift line with the patroller on the ridge.</p>
+          <p><strong>Patrol Pal was born from that storm.</strong></p>
+          <p>It is a simple way for the community to connect with the crew. A way to show appreciation that goes beyond words. A way to ensure that the people who look out for us are looked after in return.</p>
+          <p class="memoriam">In memoriam of Cole Murphy and Claire Murphy. Mammoth Mountain, CA, 2025.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSING CTA -->
+    <section class="cta">
+      <div class="wrap">
+        <h2 class="section-title">Ski safe. Support the crew.</h2>
+        <p class="section-lede" style="margin-left:auto;margin-right:auto">Patrollers and patrol directors: join the list and tell us your mountain — we want to hear from you first.</p>
+        <a class="btn" href="#join">Join the list</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap row">
+      <span>© <span id="yr">2026</span> Patrol Pal</span>
+      <span>Patrol Pal is not yet accepting donations.</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      document.getElementById('yr').textContent = new Date().getFullYear();
+
+      var cfg = window.PATROL_PAL_CONFIG || {};
+      var form = document.getElementById('waitlist');
+      var btn = document.getElementById('submit');
+      var msg = document.getElementById('msg');
+      var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function show(text, ok) {
+        msg.textContent = text;
+        msg.className = 'msg ' + (ok ? 'ok' : 'err');
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = form.email.value.trim();
+        if (!emailRe.test(email)) { show('Please enter a valid email.', false); form.email.focus(); return; }
+        if (!cfg.FORM_ENDPOINT || cfg.FORM_ENDPOINT.indexOf('PASTE_') === 0) {
+          show('Signup is not connected yet. Please check back soon.', false); return;
+        }
+
+        // URLSearchParams body (not JSON) = "simple" request, no CORS preflight.
+        // Same pattern as the @flowers partner form.
+        var body = new URLSearchParams({
+          email: email,
+          first_name: form.first_name.value.trim(),
+          home_mountain: form.home_mountain.value.trim(),
+          role: form.role.value,
+          company: form.company.value,
+          source_page: (cfg.SITE_URL || '') + location.pathname,
+          user_agent: navigator.userAgent
+        });
+
+        btn.disabled = true; btn.textContent = 'Sending…';
+        fetch(cfg.FORM_ENDPOINT, { method: 'POST', mode: 'no-cors', body: body })
+          .then(function () {
+            form.reset();
+            show("You're on the list. We'll be in touch.", true);
+            btn.textContent = 'Done';
+          })
+          .catch(function () {
+            show('Something went wrong. Please try again.', false);
+            btn.disabled = false; btn.textContent = 'Keep me posted';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
